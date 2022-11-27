@@ -1,5 +1,10 @@
-from setuptools import setup
+from setuptools import setup, find_packages
+import os
 
+PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
+README_FILE = os.path.join(PROJECT_ROOT, "README.md")
+
+VERSION = '0.0.2'
 
 classifiers = [
     "Programming Language :: Python",
@@ -10,19 +15,20 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+def get_long_description():
+    with open(README_FILE, encoding="utf-8") as f:
+        return f.read()
+
 
 setup(
     name='pymcops',
-    version='0.0.1',
-    description='pymcops',
-    py_modules=['pymc'],
-    package_dir={'':'pymcops'},
-    classifiers=classifiers,
-    long_description=long_description,
-    long_description_content_type="text/markdown",
-    url="https://github.com/danhphan/PymcOps",
+    version=VERSION,
     author="Danh Phan",
     author_email="danh.phan.mq@gmail.com",
+    description='pymcops',
+    long_description=get_long_description(),
+    long_description_content_type="text/markdown",
+    packages=find_packages(exclude=["tests", "test_*"]),
+    classifiers=classifiers,
+    
 )
